@@ -13,12 +13,12 @@ output "aws_auth_configmap_yaml" {
   value       = module.eks.aws_auth_configmap_yaml
 }
 
-output "mysql_instance_endpoint" {
-  description = "The mysql connection endpoint"
-  value       = module.mysql.db_instance_endpoint
-}
+# output "mysql_instance_endpoint" {
+#   description = "The mysql connection endpoint"
+#   value       = module.mysql.db_instance_endpoint
+# }
 
-output "mysql_instance_port" {
-  description = "The mysql connection port"
-  value       = module.mysql.db_instance_port
-}
+# output "mysql_instance_port" {
+#   description = "The mysql connection port"
+#   value       = module.mysql.db_instance_port
+# }

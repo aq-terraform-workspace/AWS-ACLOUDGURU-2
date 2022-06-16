@@ -19,8 +19,8 @@ provider "aws" {
   # skip_requesting_account_id should be disabled to generate valid ARN in apigatewayv2_api_execution_arn
   skip_requesting_account_id = false
 
-  shared_credentials_files = ["/Users/tuananh.quach/.aws/credentials"]
-  profile                  = var.aws_profile
+  # shared_credentials_files = ["/Users/tuananh.quach/.aws/credentials"]
+  # profile                  = var.aws_profile
 }
 
 

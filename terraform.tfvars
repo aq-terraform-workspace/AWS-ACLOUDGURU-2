@@ -55,7 +55,7 @@ max_unavailable      = 1
 # In production environment, we will turn off the public endpoint access and use proxy from the bastion host to access the cluster
 cluster_endpoint_private_access      = true
 cluster_endpoint_public_access       = true
-cluster_endpoint_public_access_cidrs = ["115.77.251.90/32"]
+cluster_endpoint_public_access_cidrs = ["0.0.0.0/0"]
 
 # Enable manage aws auth or not
 manage_aws_auth_configmap = true

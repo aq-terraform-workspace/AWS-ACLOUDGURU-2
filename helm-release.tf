@@ -9,6 +9,10 @@ resource "helm_release" "aws_loadbalancer_controller" {
     name  = "clusterName"
     value = module.eks.cluster_id
   }
+
+  depends_on = [
+    module.eks
+  ]
 }
 
 resource "helm_release" "ingress_nginx" {
@@ -20,5 +24,9 @@ resource "helm_release" "ingress_nginx" {
 
   values = [
     file("${path.root}/helm-charts/ingress-nginx/values-custom.yaml")
+  ]
+
+  depends_on = [
+    module.eks
   ]
 }

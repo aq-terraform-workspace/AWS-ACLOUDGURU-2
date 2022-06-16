@@ -1,7 +1,9 @@
+# Get current IP of the terraform runner to add to EKS endpoint whitelist
 data "http" "myip" {
   url = "https://ifconfig.me"
 }
 
+# Get current AWS account id to add to EKS additional policy
 data "aws_caller_identity" "current" {}
 
 module "eks_label" {
@@ -35,7 +37,8 @@ module "eks" {
   # Endpoint config
   cluster_endpoint_private_access = var.cluster_endpoint_private_access
   cluster_endpoint_public_access  = var.cluster_endpoint_public_access
-  cluster_endpoint_public_access_cidrs = ["${chomp(data.http.myip.body)}/32"]
+  cluster_endpoint_public_access_cidrs = var.cluster_endpoint_public_access_cidrs
+  # cluster_endpoint_public_access_cidrs = ["${chomp(data.http.myip.body)}/32"]
 
   # # AWS Auth config
   # manage_aws_auth_configmap = var.manage_aws_auth_configmap

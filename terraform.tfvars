@@ -53,7 +53,7 @@ max_unavailable_percentage = 50
 # Reference: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
 cluster_endpoint_private_access = true
 cluster_endpoint_public_access  = true
-# cluster_endpoint_public_access_cidrs = [""]
+# cluster_endpoint_public_access_cidrs = ["0.0.0.0/0"]
 
 # Enable manage aws auth or not
 manage_aws_auth_configmap = true

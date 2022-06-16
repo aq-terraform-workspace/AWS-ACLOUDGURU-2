@@ -37,7 +37,8 @@ module "eks" {
   # Endpoint config
   cluster_endpoint_private_access      = var.cluster_endpoint_private_access
   cluster_endpoint_public_access       = var.cluster_endpoint_public_access
-  cluster_endpoint_public_access_cidrs = var.cluster_endpoint_public_access ? concat(var.cluster_endpoint_public_access_cidrs, [try("${chomp(data.http.myip.body)}/32", "")]) : null
+  cluster_endpoint_public_access_cidrs = var.cluster_endpoint_public_access ? var.cluster_endpoint_public_access_cidrs : null
+  # cluster_endpoint_public_access_cidrs = var.cluster_endpoint_public_access ? concat(var.cluster_endpoint_public_access_cidrs, [try("${chomp(data.http.myip.body)}/32", "")]) : null
 
   # # AWS Auth config
   # manage_aws_auth_configmap = var.manage_aws_auth_configmap

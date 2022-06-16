@@ -1,7 +1,7 @@
 # Get current IP of the terraform runner to add to EKS endpoint whitelist
-data "http" "myip" {
-  url = "https://ifconfig.me"
-}
+# data "http" "myip" {
+#   url = "https://ifconfig.me"
+# }
 
 # Get current AWS account id to add to EKS additional policy
 data "aws_caller_identity" "current" {}
@@ -37,7 +37,7 @@ module "eks" {
   # Endpoint config
   cluster_endpoint_private_access      = var.cluster_endpoint_private_access
   cluster_endpoint_public_access       = var.cluster_endpoint_public_access
-  cluster_endpoint_public_access_cidrs = var.cluster_endpoint_public_access ? concat(var.cluster_endpoint_public_access_cidrs, ["${chomp(data.http.myip.body)}/32"]) : null
+  cluster_endpoint_public_access_cidrs = var.cluster_endpoint_public_access ? concat(var.cluster_endpoint_public_access_cidrs, [try("${chomp(data.http.myip.body)}/32", "")]) : null
 
   # # AWS Auth config
   # manage_aws_auth_configmap = var.manage_aws_auth_configmap
@@ -71,7 +71,7 @@ module "eks" {
   node_security_group_name            = "${module.sg_label.id}-eks-node"
   node_security_group_additional_rules = {
     ingress_from_bastion_to_cluster = {
-      description              = "Allow all traffic from Bastion"
+      description              = "Ingress allow all port/protocols from Bastion"
       protocol                 = "-1"
       from_port                = 0
       to_port                  = 0
@@ -79,7 +79,7 @@ module "eks" {
       source_security_group_id = module.sg_dmz.security_group_id
     }
     ingress_self_all = {
-      description = "Node to node all ports/protocols"
+      description = "Ingress allow all port/protocols from other Nodes"
       protocol    = "-1"
       from_port   = 0
       to_port     = 0
@@ -87,7 +87,7 @@ module "eks" {
       self        = true
     }
     egress_all = {
-      description      = "Node all egress"
+      description      = "Egress allow all port/protocols to All"
       protocol         = "-1"
       from_port        = 0
       to_port          = 0

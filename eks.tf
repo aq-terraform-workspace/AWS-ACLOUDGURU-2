@@ -2,6 +2,8 @@ data "http" "myip" {
   url = "https://ifconfig.me"
 }
 
+data "aws_caller_identity" "current" {}
+
 module "eks_label" {
   source     = "cloudposse/label/null"
   version    = "0.25.0"
@@ -99,7 +101,8 @@ module "eks" {
 
     # Additional Policy
     iam_role_additional_policies = [
-      "arn:aws:iam::806565520034:policy/AWSLoadBalancerControllerIAMPolicy"
+      # "arn:aws:iam::${var.account_id}:policy/AWSLoadBalancerControllerIAMPolicy"
+      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/AWSLoadBalancerControllerIAMPolicy"
     ]
   }
 

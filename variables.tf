@@ -11,6 +11,10 @@ variable "aws_profile" {
   default = ""
 }
 
+variable "account_id" {
+  description = "AWS Account ID"
+  type = string
+}
 
 ###########################################################
 # LABEL VARIABLES

@@ -23,7 +23,7 @@ database_subnets = ["172.16.4.0/24", "172.16.5.0/24"]
 ##################
 # ami_owner       = "amazon"
 # ami_regex_value = "amzn2-ami-hvm-2.0.20211001.1-x86_64-gp2" # Fixed version of Amazon Linux 2 AMI
-ami_owner = "099720109477"
+ami_owner       = "099720109477"
 ami_regex_value = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-*" # Fixed version of Ubuntu 20.04 LTS
 
 #############################
@@ -45,15 +45,17 @@ max_size        = 3
 desired_size    = 3
 
 # Use only 1 of these 2 option max_unavailable_percentage or max_unavailable to control the number of nodes available during the node automatic update
-force_update_version       = false
-max_unavailable_percentage = 50
-# max_unavailable = 1
+force_update_version = false
+max_unavailable      = 1
+# max_unavailable_percentage = 50
 
 # Endpoint config
 # Reference: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
-cluster_endpoint_private_access = true
-cluster_endpoint_public_access  = true
-# cluster_endpoint_public_access_cidrs = ["0.0.0.0/0"]
+# For testing purpose, we will turn on the public access to the cluster endpoint
+# In production environment, we will turn off the public endpoint access and use proxy from the bastion host to access the cluster
+cluster_endpoint_private_access      = true
+cluster_endpoint_public_access       = true
+cluster_endpoint_public_access_cidrs = ["115.77.251.90/32"]
 
 # Enable manage aws auth or not
 manage_aws_auth_configmap = true
@@ -79,5 +81,5 @@ deletion_protection        = false
 ### ECR VARIABLES ###
 #####################
 image_tag_mutability = "MUTABLE"
-scan_on_push = true
-timeouts_delete = "60m"
+scan_on_push         = true
+timeouts_delete      = "60m"

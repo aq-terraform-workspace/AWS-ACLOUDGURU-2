@@ -6,7 +6,7 @@ module "ecr_label" {
 }
 
 module "ecr" {
-  source = "lgallard/ecr/aws"
+  source  = "lgallard/ecr/aws"
   version = "0.3.2"
 
   name                 = module.ecr_label.id
@@ -14,7 +14,7 @@ module "ecr" {
   image_tag_mutability = var.image_tag_mutability
   timeouts_delete      = var.timeouts_delete
 
-	policy = <<EOF
+  policy = <<EOF
   {
     "Version": "2008-10-17",
     "Statement": [
@@ -75,5 +75,5 @@ module "ecr" {
     ]
   }
   EOF
-  tags = module.ecr_label.tags
+  tags             = module.ecr_label.tags
 }

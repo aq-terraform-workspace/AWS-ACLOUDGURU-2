@@ -11,11 +11,6 @@ variable "aws_profile" {
   default = ""
 }
 
-variable "account_id" {
-  description = "AWS Account ID"
-  type = string
-}
-
 ###########################################################
 # LABEL VARIABLES
 ###########################################################
@@ -112,8 +107,8 @@ variable "cluster_endpoint_public_access" {
 
 variable "cluster_endpoint_public_access_cidrs" {
   description = "List of CIDR blocks which can access the Amazon EKS public API server endpoint"
-  type        = list
-  default     = [ "0.0.0.0/0" ]
+  type        = list(any)
+  default     = ["0.0.0.0/0"]
 }
 
 variable "manage_aws_auth_configmap" {

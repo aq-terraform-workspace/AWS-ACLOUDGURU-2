@@ -1,0 +1,63 @@
+#cloud-config
+package_update: true
+
+ssh_authorized_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCgvKrl+wkTch/RtI906QSLgLMCQGDhpy9sr8M2YFG8nytAno5Su7eS7WdX1J//NyDDz80PZstZF+e+MdV9ASf9drEOWiq6BYdwGJzI5y6Sdl6t+cygTZ1w745teqjO95VcAhKQHEgBs5rn1SE9VcFcCLuEAdrkWtKcYsQTDrJA0SftHJulstMtbESThRW830xUbJ8lB7W8VQ+xiFmjCiqgMAMIhzvakPqsyWA8kZjkldnz3wAbxl+wu+OzSoL7mACF/k7HlJjTosm0d9xbmGSY1fqmDcXlSPgIcpHX/fhSO9R4Vh+qQBear/+6gfCpbbO4VEkmxxH5DLBon9ZW9ZVmP69S0ijZR+cWVL3FxbiQKVJ94fPweGAondVem672BwxYpjZEX6pSLWGjl3g16NyFUd1rLRjnzgDMbchNth8h8pHuMAhgnDsT++y/gdSHngj7vwkpBxRiuZJ3wM0RaNzcBO+ar3OTM11HC9Oz6Na6sT2uhikzS4WeH492KlX/CbQNivBsxX1QgQSDrsiTIizM7UBm1aiSfMiY17qOQBa9ZTu8Sk8p7TNmUtOm488juzqrDcF0ZQeSEEwjB3kBoRA7/iSvxb5T2qhOtbXrsRFgVUMf1su5+lceFtSjYW+BhvloX1kXoudidZP3qfz4CqlUtxw3crA5NbdKEXIBRd/2fQ== tuananh.quach@ITVN001716-MAC
+
+packages:
+  - ca-certificates
+  - curl
+  - git
+  - apt-transport-https
+  - lsb-release
+  - zsh
+  - tinyproxy
+  - awscli
+
+snap:
+  commands:
+    - snap install kubectl --classic
+
+write_files:
+  - path: /opt/scripts/startup.sh
+    permissions: 0755
+    owner: root
+    content: |
+      #!/bin/bash 
+      if [[ -f /root/dont-remove-me-startupscript.lock ]]; then # check if file existed
+          echo skip
+          exit 1
+      else
+          echo Lock file /root/dont-remove-me-startupscript.lock is not existed
+      fi
+      
+      echo "Change SSH Port"
+      echo "Port 443" >> /etc/ssh/sshd_config
+      systemctl restart sshd
+
+      touch /tmp/cloudinit-start-successfull.txt
+
+      echo "Installing Helm"
+      curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+      echo "Installing Kubectl"
+      curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.22.6/2022-03-09/bin/linux/amd64/kubectl
+      chmod +x ./kubectl
+      mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+      echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+      kubectl version --short --client
+
+      echo "Lock File to make sure startup script run once - Startup script was run completed at $(date)"  >> /root/dont-remove-me-startupscript.lock
+
+# Install docker and docker-compose
+runcmd:
+    - [ sh, -c, 'curl -sSL https://get.docker.com/ | sh' ]
+    - [ sh, -c, 'curl -L https://github.com/docker/compose/releases/download/$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep "tag_name" | cut -d \" -f4)/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose' ]
+    - [ sh, -c, 'sudo chmod +x /usr/local/bin/docker-compose' ]
+    - [ sh, -c, '/opt/scripts/startup.sh' ]
+
+# Add default auto created user to docker group
+system_info:
+    default_user:
+        groups: [docker]
+

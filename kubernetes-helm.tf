@@ -15,15 +15,31 @@ resource "helm_release" "aws_loadbalancer_controller" {
   ]
 }
 
-resource "helm_release" "ingress_nginx" {
-  name             = "ingress-nginx"
+resource "helm_release" "ingress_nginx_public" {
+  name             = "ingress-nginx-public"
   namespace        = "ingress-nginx"
   create_namespace = true
   repository       = "https://kubernetes.github.io/ingress-nginx"
   chart            = "ingress-nginx"
 
   values = [
-    file("${path.root}/helm-charts/ingress-nginx/values-custom.yaml")
+    file("${path.root}/helm-charts/ingress-nginx/values-custom-public.yaml")
+  ]
+
+  depends_on = [
+    module.eks
+  ]
+}
+
+resource "helm_release" "ingress_nginx_private" {
+  name             = "ingress-nginx-private"
+  namespace        = "ingress-nginx"
+  create_namespace = true
+  repository       = "https://kubernetes.github.io/ingress-nginx"
+  chart            = "ingress-nginx"
+
+  values = [
+    file("${path.root}/helm-charts/ingress-nginx/values-custom-private.yaml")
   ]
 
   depends_on = [
@@ -52,5 +68,21 @@ resource "kubectl_manifest" "cluster_issuer" {
 
   depends_on = [
     helm_release.cert_manager
+  ]
+}
+
+resource "helm_release" "external_dns" {
+  name             = "external-dns"
+  namespace        = "external-dns"
+  create_namespace = true
+  repository       = "https://kubernetes-sigs.github.io/external-dns"
+  chart            = "external-dns"
+
+  values = [
+    file("${path.root}/helm-charts/external-dns/values-custom.yaml")
+  ]
+
+  depends_on = [
+    module.eks
   ]
 }

@@ -19,7 +19,8 @@ serviceAccount:
   # Specifies whether a service account should be created
   create: true
   # Annotations to add to the service account
-  annotations: {}
+  annotations: # {}
+    eks.amazonaws.com/role-arn: arn:aws:iam::453422525221:role/ExternalDNSIAMRole
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
@@ -30,13 +31,13 @@ rbac:
   additionalPermissions: []
 
 # Annotations to add to the Deployment
-deploymentAnnotations: #{}
-  iam.amazonaws.com/role: arn:aws:iam::453422525221:role/external-dns
+deploymentAnnotations: {}
 
 podLabels: {}
 
 # Annotations to add to the Pod
 podAnnotations: {}
+  # iam.amazonaws.com/role: arn:aws:iam::453422525221:role/ExternalDNSIAMRole
 
 shareProcessNamespace: false
 

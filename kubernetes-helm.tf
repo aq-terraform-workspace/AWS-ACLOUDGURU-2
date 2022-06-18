@@ -82,6 +82,11 @@ resource "helm_release" "external_dns" {
     file("${path.root}/helm-charts/external-dns/values-custom.yaml")
   ]
 
+  set {
+    name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
+    value = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/ExternalDNSIAMRole"
+  }
+
   depends_on = [
     module.eks
   ]

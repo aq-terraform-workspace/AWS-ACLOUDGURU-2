@@ -454,8 +454,8 @@ controller:
     annotations: # {}
       service.beta.kubernetes.io/aws-load-balancer-type: "external"
       service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "instance"
-      service.beta.kubernetes.io/aws-load-balancer-name: "lb-external"
-      service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+      service.beta.kubernetes.io/aws-load-balancer-name: "lb-internal"
+      service.beta.kubernetes.io/aws-load-balancer-scheme: "internal"
       service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: true
       service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
     # clusterIP: ""
@@ -520,11 +520,11 @@ controller:
       udp: {}
 
     external:
-      enabled: false
+      enabled: true
 
     internal:
       # -- Enables an additional internal load balancer (besides the external one).
-      enabled: true
+      enabled: false
       # -- Annotations are mandatory for the load balancer to come up. Varies with the cloud service.
       annotations: # {}
         service.beta.kubernetes.io/aws-load-balancer-type: "external"

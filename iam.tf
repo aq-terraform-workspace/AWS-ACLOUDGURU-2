@@ -9,7 +9,7 @@ resource "aws_iam_policy" "external_dns" {
   policy = file("files/external-dns-policy.json")
 }
 
-resource "aws_iam_role" "test_role" {
+resource "aws_iam_role" "external_dns" {
   name = "ExternalDNSIAMRole"
 
   # Terraform's "jsonencode" function converts a

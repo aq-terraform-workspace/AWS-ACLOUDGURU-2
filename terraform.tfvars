@@ -83,3 +83,9 @@ deletion_protection        = false
 image_tag_mutability = "MUTABLE"
 scan_on_push         = true
 timeouts_delete      = "60m"
+
+#####################
+# ROUTE53 VARIABLES #
+#####################
+# main_domain = ""
+# sub_domain = ""

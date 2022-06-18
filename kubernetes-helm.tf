@@ -30,3 +30,27 @@ resource "helm_release" "ingress_nginx" {
     module.eks
   ]
 }
+
+resource "helm_release" "cert_manager" {
+  name             = "cert-manager"
+  namespace        = "cert-manager"
+  create_namespace = true
+  repository       = "https://charts.jetstack.io"
+  chart            = "cert-manager"
+
+  values = [
+    file("${path.root}/helm-charts/cert-manager/values-custom.yaml")
+  ]
+
+  depends_on = [
+    module.eks
+  ]
+}
+
+resource "kubectl_manifest" "cluster_issuer" {
+  yaml_body = file("${path.root}/helm-charts/cert-manager/cluster-issuer.yaml")
+
+  depends_on = [
+    helm_release.cert_manager
+  ]
+}

@@ -41,7 +41,7 @@ variable "main_domain" {
 
 variable "sub_domain" {
   description = "Sub domain name for Route53"
-  default     = "acloudguru"
+  default     = ""
 }
 
 ###########################################################

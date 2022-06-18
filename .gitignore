@@ -1,7 +1,8 @@
 # Other extension
-*.tfplan
 *.lock.hcl
 .DS_Store
+init.sh
+*.env
 
 # Local .terraform directories
 **/.terraform/*
@@ -9,6 +10,9 @@
 # .tfstate files
 *.tfstate
 *.tfstate.*
+
+# tfplan files
+*.tfplan
 
 # Crash log files
 crash.log

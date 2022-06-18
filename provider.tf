@@ -4,6 +4,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 4.13.0"
     }
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "~> 3.0"
+    }
   }
 }
 
@@ -23,7 +27,6 @@ provider "aws" {
   # profile                  = var.aws_profile
 }
 
-
 provider "helm" {
   kubernetes {
     host                   = module.eks.cluster_endpoint
@@ -35,3 +38,5 @@ provider "helm" {
     }
   }
 }
+
+provider "cloudflare" {}

@@ -32,6 +32,19 @@ variable "project" {
 }
 
 ###########################################################
+# ROUTE53 VARIABLES
+###########################################################
+variable "main_domain" {
+  description = "Parent domain name for Route53"
+  default     = "pierre-cardin.info"
+}
+
+variable "sub_domain" {
+  description = "Sub domain name for Route53"
+  default     = "acloudguru"
+}
+
+###########################################################
 # VPC VARIABLES
 ###########################################################
 variable "public_subnets" {

@@ -88,4 +88,4 @@ timeouts_delete      = "60m"
 # ROUTE53 VARIABLES #
 #####################
 # main_domain = ""
-# sub_domain = ""
+sub_domain = "dev"

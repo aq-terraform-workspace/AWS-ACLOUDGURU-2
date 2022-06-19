@@ -87,6 +87,11 @@ resource "helm_release" "external_dns" {
     value = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/ExternalDNSIAMRole"
   }
 
+  set {
+    name  = "domainFilters"
+    value = "{${var.sub_domain}-${data.aws_caller_identity.current.account_id}-${var.main_domain}}"
+  }
+
   depends_on = [
     module.eks
   ]

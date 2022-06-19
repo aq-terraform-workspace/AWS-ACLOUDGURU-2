@@ -118,7 +118,7 @@ txtOwnerId: ""
 txtPrefix: ""
 txtSuffix: ""
 
-domainFilters: # []
+domainFilters: #[]
   - dev-453422525221.pierre-cardin.info
 
 provider: aws

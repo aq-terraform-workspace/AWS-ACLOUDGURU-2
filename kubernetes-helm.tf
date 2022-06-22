@@ -23,23 +23,7 @@ resource "helm_release" "ingress_nginx_public" {
   chart            = "ingress-nginx"
 
   values = [
-    file("${path.root}/helm-charts/ingress-nginx/values-custom-public.yaml")
-  ]
-
-  depends_on = [
-    module.eks
-  ]
-}
-
-resource "helm_release" "ingress_nginx_private" {
-  name             = "ingress-nginx-private"
-  namespace        = "ingress-nginx"
-  create_namespace = true
-  repository       = "https://kubernetes.github.io/ingress-nginx"
-  chart            = "ingress-nginx"
-
-  values = [
-    file("${path.root}/helm-charts/ingress-nginx/values-custom-private.yaml")
+    file("${path.root}/helm-charts/ingress-nginx/values-custom.yaml")
   ]
 
   depends_on = [

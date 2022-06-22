@@ -26,8 +26,13 @@ resource "helm_release" "ingress_nginx" {
     file("${path.root}/helm-charts/ingress-nginx/values-custom.yaml")
   ]
 
-    set {
+  set {
     name  = "controller.service.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-ssl-cert"
+    value = aws_acm_certificate.cert.arn
+  }
+
+  set {
+    name  = "controller.service.internal.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-ssl-cert"
     value = aws_acm_certificate.cert.arn
   }
 

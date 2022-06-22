@@ -37,7 +37,8 @@ resource "helm_release" "ingress_nginx" {
   }
 
   depends_on = [
-    module.eks
+    module.eks,
+    aws_acm_certificate.cert
   ]
 }
 

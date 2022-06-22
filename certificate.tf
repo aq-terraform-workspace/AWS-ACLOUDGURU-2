@@ -4,7 +4,7 @@ resource "aws_acm_certificate" "cert" {
 }
 
 data "aws_route53_zone" "route53" {
-  name         = "{${var.sub_domain}.${data.aws_caller_identity.current.account_id}.${var.main_domain}}"
+  name         = "{${var.sub_domain}-${data.aws_caller_identity.current.account_id}.${var.main_domain}}"
   private_zone = false
 
   depends_on = [

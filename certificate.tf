@@ -1,5 +1,5 @@
 resource "aws_acm_certificate" "cert" {
-  domain_name       = "{${var.sub_domain}-${data.aws_caller_identity.current.account_id}.${var.main_domain}}"
+  domain_name       = module.route53.name
   validation_method = "DNS"
 }
 

@@ -458,6 +458,7 @@ controller:
       service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
       service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: true
       service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+      service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
     # clusterIP: ""
 
     # -- List of IP addresses at which the controller services are available
@@ -533,6 +534,7 @@ controller:
         service.beta.kubernetes.io/aws-load-balancer-scheme: "internal"
         service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: true
         service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+        service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
 
       # loadBalancerIP: ""
 

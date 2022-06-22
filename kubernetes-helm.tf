@@ -15,8 +15,8 @@ resource "helm_release" "aws_loadbalancer_controller" {
   ]
 }
 
-resource "helm_release" "ingress_nginx_public" {
-  name             = "ingress-nginx-public"
+resource "helm_release" "ingress_nginx" {
+  name             = "ingress-nginx"
   namespace        = "ingress-nginx"
   create_namespace = true
   repository       = "https://kubernetes.github.io/ingress-nginx"
@@ -25,6 +25,11 @@ resource "helm_release" "ingress_nginx_public" {
   values = [
     file("${path.root}/helm-charts/ingress-nginx/values-custom.yaml")
   ]
+
+    set {
+    name  = "controller.service.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-ssl-cert"
+    value = aws_acm_certificate.cert.arn
+  }
 
   depends_on = [
     module.eks

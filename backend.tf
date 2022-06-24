@@ -4,7 +4,7 @@ terraform {
     organization = "aq-tf-cloud"
 
     workspaces {
-      name = "AWS-ACLOUDGURU"
+      name = "AWS-ACLOUDGURU-2"
     }
   }
 }

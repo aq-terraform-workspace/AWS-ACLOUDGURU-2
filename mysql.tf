@@ -7,8 +7,8 @@
 # }
 
 # module "mysql_password" {
-#   source = "./modules/terraform-aws-credential"
-
+#   source         = "aq-terraform-modules/credential/aws"
+#   version        = "1.0.0"
 #   type           = "password"
 #   length         = 10
 #   parameter_name = "${module.mysql_label.id}-password"

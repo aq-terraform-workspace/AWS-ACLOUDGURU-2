@@ -13,8 +13,8 @@ module "keypair_label" {
 }
 
 module "bastion_ssh_key" {
-  source = "./modules/terraform-aws-credential"
-
+  source         = "aq-terraform-modules/credential/aws"
+  version        = "1.0.0"
   type           = "ssh"
   parameter_name = local.bastion_parameter_name
   key_name       = local.bastion_key_name
@@ -22,8 +22,8 @@ module "bastion_ssh_key" {
 }
 
 module "eks_ssh_key" {
-  source = "./modules/terraform-aws-credential"
-
+  source         = "aq-terraform-modules/credential/aws"
+  version        = "1.0.0"
   type           = "ssh"
   parameter_name = local.eks_parameter_name
   key_name       = local.eks_key_name

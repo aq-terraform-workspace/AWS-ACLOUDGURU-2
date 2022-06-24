@@ -142,7 +142,7 @@ module "eks" {
       update_config = {
         # Use only 1 of these 2 option to control the number of nodes available during the node automatic update
         # max_unavailable_percentage = var.max_unavailable_percentage # or set `max_unavailable`
-        max_unavailable            = var.max_unavailable
+        max_unavailable = var.max_unavailable
       }
 
       # Labels configuration

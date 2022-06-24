@@ -1,26 +1,15 @@
-resource "aws_acm_certificate" "cert" {
-  domain_name       = "*.${module.route53.name}"
-  validation_method = "DNS"
+module "certificate_label" {
+  source     = "cloudposse/label/null"
+  version    = "0.25.0"
+  attributes = ["certificate"]
+  context    = module.base_label.context
 }
 
-resource "aws_route53_record" "cert" {
-  for_each = {
-    for dvo in aws_acm_certificate.cert.domain_validation_options : dvo.domain_name => {
-      name   = dvo.resource_record_name
-      record = dvo.resource_record_value
-      type   = dvo.resource_record_type
-    }
-  }
 
-  allow_overwrite = true
-  name            = each.value.name
-  records         = [each.value.record]
-  ttl             = 60
-  type            = each.value.type
-  zone_id         = module.route53.zone_id
-}
+module "certificate" {
+  source  = "aq-terraform-modules/certificate/aws"
+  version = "1.0.1"
 
-resource "aws_acm_certificate_validation" "cert" {
-  certificate_arn         = aws_acm_certificate.cert.arn
-  validation_record_fqdns = [for record in aws_route53_record.cert : record.fqdn]
+  domain_name = "${var.sub_domain}-${data.aws_caller_identity.current.account_id}.${var.main_domain}"
+  tags        = module.certificate_label.tags
 }

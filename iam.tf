@@ -15,18 +15,18 @@ resource "aws_iam_role" "external_dns" {
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
   assume_role_policy = jsonencode({
-    Version: "2012-10-17",
-    Statement: [
+    Version : "2012-10-17",
+    Statement : [
       {
-        Effect: "Allow",
-        Principal: {
-          Federated: "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${module.eks.oidc_provider}"
+        Effect : "Allow",
+        Principal : {
+          Federated : "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${module.eks.oidc_provider}"
         },
-        Action: "sts:AssumeRoleWithWebIdentity",
-        Condition: {
-          StringEquals: {
-            "${module.eks.oidc_provider}:aud": "sts.amazonaws.com",
-            "${module.eks.oidc_provider}:sub": "system:serviceaccount:external-dns:external-dns"
+        Action : "sts:AssumeRoleWithWebIdentity",
+        Condition : {
+          StringEquals : {
+            "${module.eks.oidc_provider}:aud" : "sts.amazonaws.com",
+            "${module.eks.oidc_provider}:sub" : "system:serviceaccount:external-dns:external-dns"
           }
         }
       }

@@ -4,6 +4,9 @@
 init.sh
 *.env
 
+# .vscode directories
+**/.vscode
+
 # Local .terraform directories
 **/.terraform/*
 

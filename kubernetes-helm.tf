@@ -84,7 +84,7 @@ resource "helm_release" "external_dns" {
 
   set {
     name  = "domainFilters"
-    value = "{${var.sub_domain}-${data.aws_caller_identity.current.account_id}.${var.main_domain}}"
+    value = "${var.sub_domain}-${data.aws_caller_identity.current.account_id}.${var.main_domain}"
   }
 
   depends_on = [

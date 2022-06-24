@@ -13,6 +13,11 @@ output "aws_auth_configmap_yaml" {
   value       = module.eks.aws_auth_configmap_yaml
 }
 
+output "route53_zone_name" {
+  description = "Domain name of the Route53 zone"
+  value       = module.route53.name
+}
+
 # output "mysql_instance_endpoint" {
 #   description = "The mysql connection endpoint"
 #   value       = module.mysql.db_instance_endpoint

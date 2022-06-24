@@ -12,4 +12,8 @@ module "certificate" {
 
   domain_name = "${var.sub_domain}-${data.aws_caller_identity.current.account_id}.${var.main_domain}"
   tags        = module.certificate_label.tags
+
+  depends_on = [
+    module.route53
+  ]
 }

@@ -14,5 +14,5 @@ module "cloudflare_records" {
   sub_domain   = "${var.sub_domain}-${data.aws_caller_identity.current.account_id}"
   name_servers = module.route53.name_servers
 
-  depends_on = [module.route53]
+  depends_on = [module.route53] # Route53 should be created before we create additional NS records on cloudflare
 }

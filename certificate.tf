@@ -13,5 +13,5 @@ module "certificate" {
   domain_name = module.route53.name
   tags        = module.certificate_label.tags
 
-  depends_on = [module.route53]
+  depends_on = [module.route53] # Route53 should be created before we create the certificate
 }

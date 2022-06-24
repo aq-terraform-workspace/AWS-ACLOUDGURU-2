@@ -7,12 +7,11 @@ module "certificate_label" {
 
 
 module "certificate" {
-  source  = "git::https://github.com/aq-terraform-modules/terraform-aws-certificate.git?ref=master"
-  # version = "1.0.1"
+  source  = "aq-terraform-modules/certificate/aws"
+  version = "1.0.2"
 
   domain_name = module.route53.name
   sub_domain  = "*"
   tags        = module.certificate_label.tags
-
-  depends_on = [module.route53] # Route53 should be created before we create the certificate
+  depends_on  = [module.route53] # Route53 should be created before we create the certificate
 }

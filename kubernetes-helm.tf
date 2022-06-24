@@ -91,3 +91,25 @@ resource "helm_release" "external_dns" {
     module.eks
   ]
 }
+
+resource "helm_release" "jenkins" {
+  name             = "jenkins"
+  namespace        = "jenkins"
+  create_namespace = true
+  repository       = "https://charts.jenkins.io"
+  chart            = "jenkins"
+
+  values = [
+    file("${path.root}/helm-charts/jenkins/values-custom.yaml")
+  ]
+
+  set {
+    name  = "controller.jenkinsUrl"
+    value = "jenkins.${var.sub_domain}-${data.aws_caller_identity.current.account_id}.${var.main_domain}"
+  }
+
+  set {
+    name  = "controller.ingress.hostName"
+    value = "jenkins.${var.sub_domain}-${data.aws_caller_identity.current.account_id}.${var.main_domain}"
+  }
+}

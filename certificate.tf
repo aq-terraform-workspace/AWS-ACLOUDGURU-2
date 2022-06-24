@@ -12,4 +12,6 @@ module "certificate" {
 
   domain_name = module.route53.name
   tags        = module.certificate_label.tags
+
+  depends_on = [module.route53]
 }

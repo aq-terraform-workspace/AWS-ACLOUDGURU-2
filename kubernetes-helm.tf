@@ -28,17 +28,17 @@ resource "helm_release" "ingress_nginx" {
 
   set {
     name  = "controller.service.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-ssl-cert"
-    value = aws_acm_certificate.cert.arn
+    value = module.certificate.arn
   }
 
   set {
     name  = "controller.service.internal.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-ssl-cert"
-    value = aws_acm_certificate.cert.arn
+    value = module.certificate.arn
   }
 
   depends_on = [
     module.eks,
-    aws_acm_certificate.cert
+    module.certificate.arn
   ]
 }
 

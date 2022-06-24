@@ -112,4 +112,8 @@ resource "helm_release" "jenkins" {
     name  = "controller.ingress.hostName"
     value = "jenkins.${var.sub_domain}-${data.aws_caller_identity.current.account_id}.${var.main_domain}"
   }
+
+  depends_on = [
+    module.eks
+  ]
 }

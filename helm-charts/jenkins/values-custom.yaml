@@ -439,12 +439,12 @@ controller:
     apiVersion: "networking.k8s.io/v1"
     labels: {}
     annotations: # {}
-      nginx.ingress.kubernetes.io/ssl-redirect: "true"
       nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
       nginx.ingress.kubernetes.io/rewrite-target: /
       nginx.ingress.kubernetes.io/server-snippet: |
-        if ($http_x_forwarded_proto = 'http') {
-          return 301 https://$host$request_uri;
+        if ($server_port = '80') {
+          return 308 https://$host$request_uri;
         }
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"

@@ -207,20 +207,6 @@ module "eks" {
   tags = module.eks_label.tags
 }
 
-# data "terraform_remote_state" "eks" {
-#   backend = "remote"
-#   config = {
-#     organization = "aq-tf-cloud"
-#     workspaces = {
-#       name = "AWS-ACLOUDGURU"
-#     }
-#   }
-# }
-
 # data "aws_eks_cluster" "cluster" {
-#   name = data.terraform_remote_state.eks.outputs.cluster_id
-# }
-
-# data "aws_eks_cluster_auth" "cluster" {
-#   name = data.terraform_remote_state.eks.outputs.cluster_id
+#   name  = module.eks.cluster_id
 # }

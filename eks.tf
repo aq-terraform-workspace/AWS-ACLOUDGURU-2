@@ -36,8 +36,8 @@ module "eks" {
     kube-proxy = {}
     vpc-cni = {
       resolve_conflicts = "OVERWRITE"
+      service_account_role_arn = aws_iam_role.csi_ebs.arn
     }
-    aws-ebs-csi-driver = {}
   }
 
   # Endpoint config

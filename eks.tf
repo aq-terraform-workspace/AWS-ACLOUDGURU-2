@@ -13,6 +13,12 @@ module "eks_label" {
   context    = module.base_label.context
 }
 
+# Used for authentication with helm and kubectl providers
+data "aws_eks_cluster_auth" "main" {
+  name  = module.eks.cluster_id
+}
+
+
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "18.20.5"
@@ -205,8 +211,4 @@ module "eks" {
   }
 
   tags = module.eks_label.tags
-}
-
-data "aws_eks_cluster_auth" "main" {
-  name  = module.eks.cluster_id
 }

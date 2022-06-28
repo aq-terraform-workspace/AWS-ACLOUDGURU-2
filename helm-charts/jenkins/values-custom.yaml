@@ -91,7 +91,8 @@ controller:
   # The Protocol can be overwritten by specifying `controller.jenkinsUrlProtocol`.
   jenkinsUrlProtocol: "https"
   # If you are not using the provided ingress you can specify `controller.jenkinsUrl` to change the url definition.
-  jenkinsUrl: ""
+  # TODO: Change base on aws account
+  jenkinsUrl:
   # If you set this prefix and use ingress controller then you might want to set the ingress path below
   # jenkinsUriPrefix: "/jenkins"
   # Enable pod security context (must be `true` if podSecurityContextOverride, runAsUser or fsGroup are set)
@@ -441,11 +442,11 @@ controller:
     annotations: # {}
       nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
-      nginx.ingress.kubernetes.io/rewrite-target: /
       nginx.ingress.kubernetes.io/server-snippet: |
-        if ($server_port = '80') {
-          return 308 https://$host$request_uri;
-        }
+        listen 8000 proxy_protocol;
+        # if ( $server_port = 80 ) {
+        #   return 308 https://$host$request_uri;
+        # }
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
@@ -454,7 +455,8 @@ controller:
     # Set this path to jenkinsUriPrefix above or use annotations to rewrite path
     # path: "/jenkins"
     # configures the hostname e.g. jenkins.example.com
-    hostName:
+    # TODO: Change base on aws account
+    hostName: 
     tls:
     # - secretName: jenkins.cluster.local
     #   hosts:
@@ -592,7 +594,8 @@ agent:
   enabled: false
   defaultsProviderTemplate: ""
   # URL for connecting to the Jenkins contoller
-  jenkinsUrl:
+  # TODO: Change base on aws account
+  jenkinsUrl: 
   # connect to the specified host and port, instead of connecting directly to the Jenkins controller
   jenkinsTunnel:
   kubernetesConnectTimeout: 5

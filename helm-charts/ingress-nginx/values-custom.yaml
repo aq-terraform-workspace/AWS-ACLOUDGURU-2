@@ -41,9 +41,11 @@ controller:
   containerPort:
     http: 80
     https: 443
+    special: 8000
 
   # -- Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/
-  config: {}
+  config: # {}
+    use-proxy-protocol: "true"
 
   # -- Annotations to be added to the controller config configuration configmap.
   configAnnotations: {}
@@ -460,6 +462,7 @@ controller:
       service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "tcp"
       service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
       service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+      # service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:us-east-1:638747492136:certificate/635eca09-601a-440d-b5a8-d60d79d9597d"
     # clusterIP: ""
 
     # -- List of IP addresses at which the controller services are available
@@ -506,7 +509,7 @@ controller:
     targetPorts:
       http: http
       # https: https 
-      https: http # Since the TLS SSL certificate will terminate at NLB level so this should be http port instead of https port
+      https: special # Since the TLS SSL certificate will terminate at NLB level so this should be http port instead of https port
 
     type: LoadBalancer
 
@@ -538,6 +541,7 @@ controller:
         service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "tcp"
         service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
         service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+        # service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:us-east-1:638747492136:certificate/635eca09-601a-440d-b5a8-d60d79d9597d"
 
       # loadBalancerIP: ""
 

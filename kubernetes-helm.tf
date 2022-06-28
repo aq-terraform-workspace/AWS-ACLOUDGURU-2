@@ -61,9 +61,9 @@
 resource "kubectl_manifest" "cluster_issuer" {
   yaml_body = file("${path.root}/helm-charts/cert-manager/cluster-issuer.yaml")
 
-  depends_on = [
-    helm_release.cert_manager
-  ]
+  # depends_on = [
+  #   helm_release.cert_manager
+  # ]
 }
 
 # resource "helm_release" "external_dns" {

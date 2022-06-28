@@ -207,6 +207,6 @@ module "eks" {
   tags = module.eks_label.tags
 }
 
-data "aws_eks_cluster" "cluster" {
+data "aws_eks_cluster" "main" {
   name  = module.eks.cluster_id
 }

@@ -46,6 +46,8 @@ controller:
   # -- Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/
   config: # {}
     use-proxy-protocol: "true"
+    server-snippet: |
+      listen 8000 proxy_protocol;
 
   # -- Annotations to be added to the controller config configuration configmap.
   configAnnotations: {}

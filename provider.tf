@@ -54,10 +54,11 @@ provider "kubectl" {
   host                   = module.eks.cluster_endpoint
   cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
   load_config_file       = false
+  token                  = data.aws_eks_cluster.main.token
 
-  exec {
-    api_version = "client.authentication.k8s.io/v1alpha1"
-    command     = "aws"
-    args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_id, "--region", "us-east-1"]
-  }
+  # exec {
+  #   api_version = "client.authentication.k8s.io/v1alpha1"
+  #   command     = "aws"
+  #   args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_id, "--region", "us-east-1"]
+  # }
 }

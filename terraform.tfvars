@@ -41,8 +41,8 @@ instance_types  = ["t3a.medium", "t3.medium", "t2.medium"]
 capacity_type   = "SPOT"
 disk_size       = 50
 min_size        = 1
-max_size        = 2
-desired_size    = 2
+max_size        = 3
+desired_size    = 3
 
 # Use only 1 of these 2 option max_unavailable_percentage or max_unavailable to control the number of nodes available during the node automatic update
 force_update_version = false

@@ -3,8 +3,10 @@
 #   url = "https://ifconfig.me"
 # }
 
-# Get current AWS account id to add to EKS additional policy
-data "aws_caller_identity" "current" {}
+# Used for authentication with helm and kubectl providers
+data "aws_eks_cluster_auth" "main" {
+  name  = module.eks.cluster_id
+}
 
 module "eks_label" {
   source     = "cloudposse/label/null"
@@ -12,12 +14,6 @@ module "eks_label" {
   attributes = ["eks"]
   context    = module.base_label.context
 }
-
-# Used for authentication with helm and kubectl providers
-data "aws_eks_cluster_auth" "main" {
-  name  = module.eks.cluster_id
-}
-
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
@@ -112,10 +108,10 @@ module "eks" {
     disk_size = var.disk_size
 
     # Additional Policy
-    iam_role_additional_policies = [
-      # "arn:aws:iam::${var.account_id}:policy/AWSLoadBalancerControllerIAMPolicy"
-      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/AWSLoadBalancerControllerIAMPolicy"
-    ]
+    # iam_role_additional_policies = [
+    #   # "arn:aws:iam::${var.account_id}:policy/AWSLoadBalancerControllerIAMPolicy"
+    #   "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/AWSLoadBalancerControllerIAMPolicy"
+    # ]
   }
 
   eks_managed_node_groups = {

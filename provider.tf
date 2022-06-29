@@ -63,3 +63,6 @@ provider "kubectl" {
   #   args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_id, "--region", "us-east-1"]
   # }
 }
+
+# Get current AWS account id to add to Kubernetes Addons
+data "aws_caller_identity" "current" {}

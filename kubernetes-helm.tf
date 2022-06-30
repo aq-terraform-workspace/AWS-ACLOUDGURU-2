@@ -43,6 +43,7 @@ module "kubernetes_addons" {
 
   depends_on = [
     module.eks,
-    module.certificate.arn
+    module.certificate.arn,
+    kustomization_resource.ebs_csi
   ]
 }

@@ -1,3 +1,16 @@
+###########################################################
+# EXTERNAL SNAPSHOTTER
+###########################################################
+data "kustomization_build" "ebs_csi" {
+  path = "manifests/ebs-csi-driver"
+}
+resource "kustomization_resource" "ebs_csi" {
+  for_each = data.kustomization_build.ebs_csi.ids
+
+  manifest = data.kustomization_build.ebs_csi.manifests[each.value]
+}
+
+
 module "kubernetes_addons" {
   source = "git::https://github.com/aq-terraform-modules/terraform-aws-kubernetes-addons.git?ref=master"
 

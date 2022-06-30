@@ -16,6 +16,10 @@ terraform {
       source  = "gavinbunney/kubectl"
       version = ">= 1.7.0"
     }
+    kustomization = {
+      source = "kbst/kustomization"
+      version = "0.9.0"
+    }
   }
 }
 
@@ -62,6 +66,11 @@ provider "kubectl" {
   #   command     = "aws"
   #   args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_id, "--region", "us-east-1"]
   # }
+}
+
+provider "kustomization" {
+  kubeconfig_raw = yamlencode(local.kubeconfig)
+  context        = local.kubeconfig_context
 }
 
 # Get current AWS account id to add to Kubernetes Addons

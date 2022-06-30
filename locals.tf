@@ -1,4 +1,7 @@
 locals {
+  ###########################################################
+  # Hack for Kustomization
+  ###########################################################
   # non-default context name to protect from using wrong kubeconfig
   kubeconfig_context = "_terraform-kustomization-${module.eks.cluster_id}_"
 

@@ -5,7 +5,7 @@
 
 # Used for authentication with helm and kubectl providers
 data "aws_eks_cluster_auth" "main" {
-  name  = module.eks.cluster_id
+  name = module.eks.cluster_id
 }
 
 module "eks_label" {
@@ -34,7 +34,7 @@ module "eks" {
       resolve_conflicts = "OVERWRITE"
     }
     aws-ebs-csi-driver = {
-      resolve_conflicts = "OVERWRITE"
+      resolve_conflicts        = "OVERWRITE"
       service_account_role_arn = aws_iam_role.csi_ebs.arn
     }
   }

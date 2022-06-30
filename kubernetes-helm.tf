@@ -14,7 +14,7 @@ resource "kustomization_resource" "ebs_csi" {
 module "kubernetes_addons" {
   source = "git::https://github.com/aq-terraform-modules/terraform-aws-kubernetes-addons.git?ref=master"
 
-  account_id = data.aws_caller_identity.current.account_id
+  account_id    = data.aws_caller_identity.current.account_id
   oidc_provider = module.eks.oidc_provider
 
   enable_aws_lb_controller = true
@@ -32,7 +32,7 @@ module "kubernetes_addons" {
 
   enable_external_dns = true
   external_dns_context = {
-    "domainFilters"                                             = "{${var.sub_domain}-${data.aws_caller_identity.current.account_id}.${var.main_domain}}"
+    "domainFilters" = "{${var.sub_domain}-${data.aws_caller_identity.current.account_id}.${var.main_domain}}"
   }
 
   enable_jenkins = true

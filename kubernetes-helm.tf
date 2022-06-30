@@ -2,7 +2,7 @@
 # EXTERNAL SNAPSHOTTER
 ###########################################################
 data "kustomization_build" "ebs_csi" {
-  path = "manifests/ebs-csi-driver"
+  path = "files/k8s-custom-manifests/ebs-csi-driver"
 }
 resource "kustomization_resource" "ebs_csi" {
   for_each = data.kustomization_build.ebs_csi.ids

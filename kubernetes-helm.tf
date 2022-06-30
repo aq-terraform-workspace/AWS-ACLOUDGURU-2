@@ -5,9 +5,9 @@ data "kustomization_build" "ebs_csi" {
   path = "manifests/ebs-csi-driver"
 }
 resource "kustomization_resource" "ebs_csi" {
-  count = length(data.kustomization_build.ebs_csi.ids)
+  count = data.kustomization_build.ebs_csi.ids
 
-  manifest = data.kustomization_build.ebs_csi.manifests[count.index]
+  manifest = data.kustomization_build.ebs_csi.manifests[each.value]
 }
 
 

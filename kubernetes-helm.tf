@@ -8,6 +8,10 @@ resource "kustomization_resource" "ebs_csi" {
   for_each = data.kustomization_build.ebs_csi.ids
 
   manifest = data.kustomization_build.ebs_csi.manifests[each.value]
+
+  depends_on = [
+    module.kubernetes_addons
+  ]
 }
 
 

@@ -129,7 +129,7 @@ module "sg_database" {
 resource "aws_security_group" "efs" {
   name        = "${module.sg_label.id}-efs"
   description = "Allow inbound NFS traffic from private subnets of the VPC"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = module.base_network.vpc_id
 
   ingress {
     description = "Allow NFS 2049/tcp"

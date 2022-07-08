@@ -13,7 +13,7 @@ resource "aws_efs_file_system" "efs" {
 }
 
 resource "aws_efs_mount_target" "efs_mt" {
-  count = length(module.vpc.private_subnets)
+  count = length(module.base_network.private_subnets)
 
   file_system_id  = aws_efs_file_system.efs.id
   subnet_id       = module.base_network.private_subnets[count.index]

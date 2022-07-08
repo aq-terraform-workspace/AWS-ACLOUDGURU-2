@@ -20,7 +20,7 @@ module "kubernetes_addons" {
   enable_snapscheduler = true
 
   enable_efs_csi_driver  = true
-  efs_csi_file_system_id = aws_efs_file_system.efs.id
+  efs_csi_file_system_id = module.efs_csi.id
 
   enable_aws_lb_controller = true
   aws_lb_controller_context = {

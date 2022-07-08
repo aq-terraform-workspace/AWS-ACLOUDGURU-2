@@ -46,6 +46,8 @@ module "kubernetes_addons" {
     "controller.ingress.hostName" = "jenkins.${var.sub_domain}-${data.aws_caller_identity.current.account_id}.${var.main_domain}"
   }
 
+  enable_velero = true
+
   depends_on = [
     module.eks,
     module.certificate.arn,

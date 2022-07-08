@@ -1,0 +1,21 @@
+module "efs_label" {
+  source     = "cloudposse/label/null"
+  version    = "0.25.0"
+  attributes = ["efs"]
+  context    = module.base_label.context
+}
+
+resource "aws_efs_file_system" "efs" {
+  creation_token = "efs"
+  encrypted      = true
+
+  tags = module.efs_label.tags
+}
+
+resource "aws_efs_mount_target" "efs_mt" {
+  for_each = module.base_network.private_subnets
+
+  file_system_id  = aws_efs_file_system.efs.id
+  subnet_id       = module.base_network.private_subnets[each.value]
+  security_groups = [aws_security_group.efs.id]
+}

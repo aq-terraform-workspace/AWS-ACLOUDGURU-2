@@ -17,6 +17,8 @@ module "kubernetes_addons" {
   account_id    = data.aws_caller_identity.current.account_id
   oidc_provider = module.eks.oidc_provider
 
+  enable_snapscheduler = true
+
   enable_aws_lb_controller = true
   aws_lb_controller_context = {
     "clusterName" = module.eks.cluster_id

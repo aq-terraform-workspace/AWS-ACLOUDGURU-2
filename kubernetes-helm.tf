@@ -23,7 +23,6 @@ module "kubernetes_addons" {
 
   # EFS CSI Driver
   enable_efs_csi_driver  = true
-  efs_csi_file_system_id = module.efs_csi.id
 
   # LB Controller
   enable_aws_lb_controller = true

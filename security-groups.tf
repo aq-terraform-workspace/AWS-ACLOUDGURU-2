@@ -125,19 +125,3 @@ module "sg_database" {
 
   tags = module.sg_label.tags
 }
-
-resource "aws_security_group" "efs" {
-  name        = "${module.sg_label.id}-efs"
-  description = "Allow inbound NFS traffic from private subnets of the VPC"
-  vpc_id      = module.base_network.vpc_id
-
-  ingress {
-    description = "Allow NFS 2049/tcp"
-    cidr_blocks = module.base_network.private_subnets_cidr_blocks
-    from_port   = 2049
-    to_port     = 2049
-    protocol    = "tcp"
-  }
-
-  tags = module.sg_label.tags
-}

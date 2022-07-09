@@ -23,6 +23,10 @@ module "kubernetes_addons" {
 
   # EFS CSI Driver
   enable_efs_csi_driver  = true
+  efs_network_properties = {
+    vpc_id = module.base_network.vpc_id
+    subnets = module.base_network.private_subnets
+  }
 
   # LB Controller
   enable_aws_lb_controller = true

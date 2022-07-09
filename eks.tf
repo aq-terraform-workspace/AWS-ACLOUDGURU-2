@@ -110,7 +110,7 @@ module "eks" {
     # Additional Policy
     # iam_role_additional_policies = [
     #   # "arn:aws:iam::${var.account_id}:policy/AWSLoadBalancerControllerIAMPolicy"
-    #   "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/AWSLoadBalancerControllerIAMPolicy"
+    #   "arn:aws:iam::${local.account_id}:policy/AWSLoadBalancerControllerIAMPolicy"
     # ]
   }
 

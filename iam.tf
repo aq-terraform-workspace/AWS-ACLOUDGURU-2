@@ -16,7 +16,7 @@ resource "aws_iam_role" "csi_ebs" {
       {
         Effect : "Allow",
         Principal : {
-          Federated : "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${module.eks.oidc_provider}"
+          Federated : "arn:aws:iam::${local.account_id}:oidc-provider/${module.eks.oidc_provider}"
         },
         Action : "sts:AssumeRoleWithWebIdentity",
         Condition : {

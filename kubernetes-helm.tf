@@ -26,6 +26,7 @@ module "kubernetes_addons" {
   efs_network_properties = {
     vpc_id = module.base_network.vpc_id
     subnets = module.base_network.private_subnets
+    subnets_cidr_block = module.base_network.private_subnets_cidr_blocks
   }
 
   # LB Controller

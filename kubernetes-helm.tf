@@ -35,6 +35,13 @@ module "kubernetes_addons" {
     "clusterName" = module.eks.cluster_id
   }
 
+  # Prometheus
+  enable_prometheus = true
+  prometheus_context = {
+    "grafana.ingress.hosts" = "{grafana.${var.sub_domain}-${local.account_id}.${var.main_domain}}"
+    "prometheus.ingress.hosts" = "{prometheus.${var.sub_domain}-${local.account_id}.${var.main_domain}}"
+  }
+
   # Ingress Nginx
   enable_ingress_nginx = true
   ingress_nginx_context = {

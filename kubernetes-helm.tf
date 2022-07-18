@@ -19,7 +19,7 @@ module "kubernetes_addons" {
   oidc_provider = module.eks.oidc_provider
 
   # Snapscheduler
-  enable_snapscheduler = true
+  enable_snapscheduler = false
 
   # EFS CSI Driver
   enable_efs_csi_driver  = true
@@ -43,7 +43,7 @@ module "kubernetes_addons" {
   }
 
   # Cert Manager
-  enable_cert_manager = true
+  enable_cert_manager = false
 
   # External DNS
   enable_external_dns = true
@@ -59,7 +59,7 @@ module "kubernetes_addons" {
   }
 
   # Velero
-  enable_velero = true
+  enable_velero = false
 
   depends_on = [
     module.eks,

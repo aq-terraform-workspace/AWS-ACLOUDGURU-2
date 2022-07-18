@@ -5,9 +5,9 @@ module "route53" {
 }
 
 module "cloudflare_records" {
-  providers = {
-    cloudflare = cloudflare
-  }
+  # providers = {
+  #   cloudflare = cloudflare
+  # }
 
   source       = "git::https://github.com/aq-terraform-modules/terraform-cloudflare-general.git?ref=dev"
   main_domain  = var.main_domain

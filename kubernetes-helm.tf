@@ -69,6 +69,9 @@ module "kubernetes_addons" {
   # Velero
   enable_velero = false
 
+  # Keda
+  enable_keda = true
+
   depends_on = [
     module.eks,
     module.certificate.arn,

@@ -202,6 +202,10 @@ data "tls_certificate" "this" {
   count = local.create && var.enable_irsa ? 1 : 0
 
   url = aws_eks_cluster.this[0].identity[0].oidc[0].issuer
+
+  depends_on = [
+    aws_eks_cluster.this
+  ]
 }
 
 resource "aws_iam_openid_connect_provider" "oidc_provider" {

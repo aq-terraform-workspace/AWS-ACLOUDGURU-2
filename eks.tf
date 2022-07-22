@@ -18,7 +18,7 @@ module "eks_label" {
 module "eks" {
   # source  = "terraform-aws-modules/eks/aws"
   # version = "18.26.5"
-  source = "${path.root}/modules/terraform-aws-eks"
+  source = "./modules/terraform-aws-eks"
 
   cluster_version = var.cluster_version
   cluster_name    = module.eks_label.id

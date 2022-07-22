@@ -22,7 +22,7 @@ module "kubernetes_addons" {
   enable_snapscheduler = false
 
   # EFS CSI Driver
-  enable_efs_csi_driver  = true
+  enable_efs_csi_driver  = false
   efs_network_properties = {
     vpc_id = module.base_network.vpc_id
     subnets = module.base_network.private_subnets
@@ -49,9 +49,6 @@ module "kubernetes_addons" {
     "controller.service.internal.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-ssl-cert" = module.certificate.arn
   }
 
-  # Cert Manager
-  enable_cert_manager = false
-
   # External DNS
   enable_external_dns = true
   external_dns_context = {
@@ -59,18 +56,21 @@ module "kubernetes_addons" {
   }
 
   # Jenkins
-  enable_jenkins = true
-  jenkins_chart_version = "4.1.12"
+  enable_jenkins = false
+  jenkins_chart_version = "4.1.13"
   jenkins_context = {
     "controller.jenkinsUrl"       = "jenkins.${var.sub_domain}-${local.account_id}.${var.main_domain}"
     "controller.ingress.hostName" = "jenkins.${var.sub_domain}-${local.account_id}.${var.main_domain}"
   }
 
+  # Cert Manager
+  enable_cert_manager = false
+
   # Velero
   enable_velero = false
 
   # Keda
-  enable_keda = true
+  enable_keda = false
 
   depends_on = [
     module.eks,

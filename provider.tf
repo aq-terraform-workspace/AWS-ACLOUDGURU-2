@@ -21,7 +21,7 @@ terraform {
       version = "~> 0.9.0"
     }
     tls = {
-      version = "~> 3.4.0"
+      version = "< 4.0.0"
     }
   }
 }

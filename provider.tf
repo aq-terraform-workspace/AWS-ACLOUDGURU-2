@@ -2,11 +2,11 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.13.0"
+      version = "~> 4.22.0"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.5.1"
+      version = "~> 2.5.1"
     }
     cloudflare = {
       source  = "cloudflare/cloudflare"
@@ -14,11 +14,11 @@ terraform {
     }
     kubectl = {
       source  = "gavinbunney/kubectl"
-      version = ">= 1.7.0"
+      version = "~> 1.7.0"
     }
     kustomization = {
       source  = "kbst/kustomization"
-      version = "0.9.0"
+      version = "~> 0.9.0"
     }
   }
 }

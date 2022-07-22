@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.21.0"
+      version = "~> 4.22.0"
     }
     helm = {
       source  = "hashicorp/helm"
@@ -19,6 +19,9 @@ terraform {
     kustomization = {
       source  = "kbst/kustomization"
       version = "~> 0.9.0"
+    }
+    tls = {
+      version = "~> 3.4.0"
     }
   }
 }

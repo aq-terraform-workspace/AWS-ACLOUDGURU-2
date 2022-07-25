@@ -13,6 +13,7 @@ data "template_file" "user_data" {
 module "bastion" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "4.0.0"
+  create  = false
 
   name                        = module.bastion_label.id
   ami                         = data.aws_ami.ec2_ami_regex.id

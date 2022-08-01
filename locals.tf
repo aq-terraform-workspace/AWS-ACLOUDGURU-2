@@ -1,6 +1,8 @@
 locals {
   account_id = data.aws_caller_identity.current.account_id
 
+  azs = ["${var.region}a", "${var.region}b"]
+
   ###########################################################
   # Hack for Kustomization
   ###########################################################

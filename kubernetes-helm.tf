@@ -73,7 +73,7 @@ module "kubernetes_addons" {
   enable_keda = false
 
   # Linkerd
-  enable_linkerd = true
+  enable_linkerd = false
 
   depends_on = [
     module.eks,

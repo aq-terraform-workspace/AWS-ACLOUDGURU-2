@@ -1,7 +1,3 @@
-locals {
-  azs = ["${var.region}a", "${var.region}b"]
-}
-
 module "vpc_label" {
   source     = "cloudposse/label/null"
   version    = "0.25.0"

@@ -63,6 +63,12 @@ module "kubernetes_addons" {
     "controller.ingress.hostName" = "jenkins.${var.sub_domain}-${local.account_id}.${var.main_domain}"
   }
 
+  # Vault
+  enable_vault = true
+  vault_context = {
+    "server.ingress.hosts[0].host" = "vault.${var.sub_domain}-${local.account_id}.${var.main_domain}"
+  }
+
   # Cert Manager
   enable_cert_manager = false
 

@@ -1,6 +1,10 @@
 ###########################################################
 # GENERAL VARIABLES
 ###########################################################
+variable "region" {
+  description = "AWS Region"
+}
+
 variable "aws_profile" {
   type    = string
   default = ""

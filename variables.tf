@@ -3,7 +3,7 @@
 ###########################################################
 variable "region" {
   description = "AWS Region"
-  default     = "us-west-2"
+  # default     = "us-west-2"
 }
 
 variable "aws_profile" {

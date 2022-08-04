@@ -19,7 +19,7 @@ module "kubernetes_addons" {
   oidc_provider = module.eks.oidc_provider
 
   # Snapscheduler
-  enable_snapscheduler = fales
+  enable_snapscheduler = false
 
   # EFS CSI Driver
   enable_efs_csi_driver  = false
@@ -73,7 +73,7 @@ module "kubernetes_addons" {
   enable_cert_manager = false
 
   # Velero
-  enable_velero = fales
+  enable_velero = false
 
   # Keda
   enable_keda = false

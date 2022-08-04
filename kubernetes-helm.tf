@@ -19,7 +19,7 @@ module "kubernetes_addons" {
   oidc_provider = module.eks.oidc_provider
 
   # Snapscheduler
-  enable_snapscheduler = true
+  enable_snapscheduler = fales
 
   # EFS CSI Driver
   enable_efs_csi_driver  = false
@@ -64,7 +64,7 @@ module "kubernetes_addons" {
   }
 
   # Vault
-  enable_vault = false
+  enable_vault = true
   vault_context = {
     "server.ingress.hosts[0].host" = "vault.${var.sub_domain}-${local.account_id}.${var.main_domain}"
   }
@@ -73,7 +73,7 @@ module "kubernetes_addons" {
   enable_cert_manager = false
 
   # Velero
-  enable_velero = true
+  enable_velero = fales
 
   # Keda
   enable_keda = false

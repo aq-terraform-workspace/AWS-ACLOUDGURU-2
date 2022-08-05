@@ -57,14 +57,14 @@ module "kubernetes_addons" {
 
   # Jenkins
   enable_jenkins = true
-  jenkins_chart_version = "4.1.13"
+  jenkins_chart_version = "4.1.14"
   jenkins_context = {
     "controller.jenkinsUrl"       = "jenkins.${var.sub_domain}-${local.account_id}.${var.main_domain}"
     "controller.ingress.hostName" = "jenkins.${var.sub_domain}-${local.account_id}.${var.main_domain}"
   }
 
   # Vault
-  enable_vault = true
+  enable_vault = false
   vault_context = {
     "server.ingress.hosts[0].host" = "vault.${var.sub_domain}-${local.account_id}.${var.main_domain}"
   }

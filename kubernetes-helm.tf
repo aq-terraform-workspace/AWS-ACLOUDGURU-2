@@ -56,7 +56,7 @@ module "kubernetes_addons" {
   }
 
   # Jenkins
-  enable_jenkins = false
+  enable_jenkins = true
   jenkins_chart_version = "4.1.13"
   jenkins_context = {
     "controller.jenkinsUrl"       = "jenkins.${var.sub_domain}-${local.account_id}.${var.main_domain}"

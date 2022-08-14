@@ -63,6 +63,9 @@ module "kubernetes_addons" {
     "controller.ingress.hostName" = "jenkins.${var.sub_domain}-${local.account_id}.${var.main_domain}"
   }
 
+  # Secret CSI Driver
+  enable_secret_csi = true
+
   # Vault
   enable_vault = true
   vault_context = {

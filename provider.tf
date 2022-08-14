@@ -28,7 +28,6 @@ terraform {
 
 # Configure the AWS Provider
 provider "aws" {
-  region = var.region
   # Make it faster by skipping something
   skip_get_ec2_platforms      = true
   skip_metadata_api_check     = true
@@ -78,3 +77,4 @@ provider "kustomization" {
 
 # Get current AWS account id to add to Kubernetes Addons
 data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}

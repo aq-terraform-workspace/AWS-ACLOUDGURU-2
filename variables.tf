@@ -1,10 +1,6 @@
 ###########################################################
 # GENERAL VARIABLES
 ###########################################################
-variable "region" {
-  description = "AWS Region"
-}
-
 variable "aws_profile" {
   type    = string
   default = ""
@@ -91,7 +87,7 @@ variable "enable_monitoring" {
 }
 
 variable "bastion_ami" {
-  # The AMI id must be available in the var.region. You can search for available Ubuntu AMI at the following URL
+  # The AMI id must be available in the local.region. You can search for available Ubuntu AMI at the following URL
   # https://cloud-images.ubuntu.com/locator/ec2/
   description = "AMI ID to create the bastion"
   default     = "ami-073998ba87e205747" # Amazon Linux 2 in ap-southeast-1

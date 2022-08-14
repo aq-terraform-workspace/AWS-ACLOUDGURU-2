@@ -64,7 +64,7 @@ module "kubernetes_addons" {
   }
 
   # Vault
-  enable_vault = false
+  enable_vault = true
   vault_context = {
     "server.ingress.hosts[0].host" = "vault.${var.sub_domain}-${local.account_id}.${var.main_domain}"
   }

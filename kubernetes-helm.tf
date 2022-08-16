@@ -79,7 +79,7 @@ module "kubernetes_addons" {
   enable_velero = false
 
   # Keda
-  enable_keda = false
+  enable_keda = true
 
   # Linkerd
   enable_linkerd = false

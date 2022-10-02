@@ -16,16 +16,43 @@ module "kubernetes_addons" {
 
   # Basic variables
   base_label_context = module.base_label.context
-  oidc_provider = module.eks.oidc_provider
+  oidc_provider      = module.eks.oidc_provider
+
+  ##### Recommended addons #####
+  ##############################
+  # Ingress Nginx
+  enable_ingress_nginx = true
+  ingress_nginx_context = {
+    "controller.service.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-ssl-cert"          = module.certificate.arn
+    "controller.service.internal.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-ssl-cert" = module.certificate.arn
+  }
+  #############################
+  ##############################
+
+  # ArgoCD
+  enable_argocd        = true
+  argocd_chart_version = "5.5.7"
+  argocd_context = {
+    "server.ingress.hosts"     = "{argocd.${var.sub_domain}-${local.account_id}.${var.main_domain}}"
+    "server.ingressGrpc.hosts" = "{grpc.argocd.${var.sub_domain}-${local.account_id}.${var.main_domain}}"
+    "server.config.url"        = "argocd.${var.sub_domain}-${local.account_id}.${var.main_domain}"
+  }
+
+  # Prometheus
+  enable_prometheus = true
+  prometheus_context = {
+    "grafana.ingress.hosts"    = "{grafana.${var.sub_domain}-${local.account_id}.${var.main_domain}}"
+    "prometheus.ingress.hosts" = "{prometheus.${var.sub_domain}-${local.account_id}.${var.main_domain}}"
+  }
 
   # Snapscheduler
   enable_snapscheduler = false
 
   # EFS CSI Driver
-  enable_efs_csi_driver  = false
+  enable_efs_csi_driver = false
   efs_network_properties = {
-    vpc_id = module.base_network.vpc_id
-    subnets = module.base_network.private_subnets
+    vpc_id             = module.base_network.vpc_id
+    subnets            = module.base_network.private_subnets
     subnets_cidr_block = module.base_network.private_subnets_cidr_blocks
   }
 
@@ -35,20 +62,6 @@ module "kubernetes_addons" {
     "clusterName" = module.eks.cluster_id
   }
 
-  # Prometheus
-  enable_prometheus = false
-  prometheus_context = {
-    "grafana.ingress.hosts" = "{grafana.${var.sub_domain}-${local.account_id}.${var.main_domain}}"
-    "prometheus.ingress.hosts" = "{prometheus.${var.sub_domain}-${local.account_id}.${var.main_domain}}"
-  }
-
-  # Ingress Nginx
-  enable_ingress_nginx = false
-  ingress_nginx_context = {
-    "controller.service.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-ssl-cert"          = module.certificate.arn
-    "controller.service.internal.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-ssl-cert" = module.certificate.arn
-  }
-
   # External DNS
   enable_external_dns = false
   external_dns_context = {
@@ -56,7 +69,7 @@ module "kubernetes_addons" {
   }
 
   # Jenkins
-  enable_jenkins = false
+  enable_jenkins        = false
   jenkins_chart_version = "4.1.14"
   jenkins_context = {
     "controller.jenkinsUrl"       = "jenkins.${var.sub_domain}-${local.account_id}.${var.main_domain}"

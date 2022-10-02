@@ -30,6 +30,6 @@ module "cloudflare_records" {
 
   depends_on = [
     null_resource.cloudflare_purge, # Old records should be purged before creating new records
-    module.route53, # Route53 should be created before we create additional NS records on cloudflare
+    module.route53,                 # Route53 should be created before we create additional NS records on cloudflare
   ]
 }

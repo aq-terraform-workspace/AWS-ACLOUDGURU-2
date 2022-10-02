@@ -26,6 +26,12 @@ module "kubernetes_addons" {
     "controller.service.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-ssl-cert"          = module.certificate.arn
     "controller.service.internal.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-ssl-cert" = module.certificate.arn
   }
+
+  # LB Controller
+  enable_aws_lb_controller = true
+  aws_lb_controller_context = {
+    "clusterName" = module.eks.cluster_id
+  }
   #############################
   ##############################
 
@@ -54,12 +60,6 @@ module "kubernetes_addons" {
     vpc_id             = module.base_network.vpc_id
     subnets            = module.base_network.private_subnets
     subnets_cidr_block = module.base_network.private_subnets_cidr_blocks
-  }
-
-  # LB Controller
-  enable_aws_lb_controller = false
-  aws_lb_controller_context = {
-    "clusterName" = module.eks.cluster_id
   }
 
   # External DNS

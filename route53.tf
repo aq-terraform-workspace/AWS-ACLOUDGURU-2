@@ -4,7 +4,10 @@ module "route53" {
   sub_domain  = "${var.sub_domain}-${local.account_id}"
 }
 
-resource "null_resource" "cloudflare_purge_1" {
+resource "null_resource" "cloudflare_purge" {
+  triggers = {
+    "script_change" = file("${path.root}/scripts/cloudinit.yaml")
+  }
 
   provisioner "local-exec" {
     working_dir = "${path.root}/scripts" # assuming it's this directory
@@ -25,5 +28,7 @@ module "cloudflare_records" {
   sub_domain   = length(var.sub_domain) > 0 ? "${var.sub_domain}-${local.account_id}" : local.account_id
   name_servers = module.route53.name_servers
 
-  depends_on = [module.route53] # Route53 should be created before we create additional NS records on cloudflare
+  depends_on = [
+    module.route53  # Route53 should be created before we create additional NS records on cloudflare
+  ]
 }

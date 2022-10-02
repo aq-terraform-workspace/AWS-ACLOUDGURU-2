@@ -64,10 +64,10 @@ module "kubernetes_addons" {
   }
 
   # Secret CSI Driver
-  enable_secret_csi = true
+  enable_secret_csi = false
 
   # Vault
-  enable_vault = true
+  enable_vault = false
   vault_context = {
     "server.ingress.hosts[0].host" = "vault.${var.sub_domain}-${local.account_id}.${var.main_domain}"
   }
@@ -79,7 +79,7 @@ module "kubernetes_addons" {
   enable_velero = false
 
   # Keda
-  enable_keda = true
+  enable_keda = false
 
   # Linkerd
   enable_linkerd = false

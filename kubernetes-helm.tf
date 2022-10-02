@@ -30,33 +30,33 @@ module "kubernetes_addons" {
   }
 
   # LB Controller
-  enable_aws_lb_controller = true
+  enable_aws_lb_controller = false
   aws_lb_controller_context = {
     "clusterName" = module.eks.cluster_id
   }
 
   # Prometheus
-  enable_prometheus = true
+  enable_prometheus = false
   prometheus_context = {
     "grafana.ingress.hosts" = "{grafana.${var.sub_domain}-${local.account_id}.${var.main_domain}}"
     "prometheus.ingress.hosts" = "{prometheus.${var.sub_domain}-${local.account_id}.${var.main_domain}}"
   }
 
   # Ingress Nginx
-  enable_ingress_nginx = true
+  enable_ingress_nginx = false
   ingress_nginx_context = {
     "controller.service.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-ssl-cert"          = module.certificate.arn
     "controller.service.internal.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-ssl-cert" = module.certificate.arn
   }
 
   # External DNS
-  enable_external_dns = true
+  enable_external_dns = false
   external_dns_context = {
     "domainFilters" = "{${var.sub_domain}-${local.account_id}.${var.main_domain}}"
   }
 
   # Jenkins
-  enable_jenkins = true
+  enable_jenkins = false
   jenkins_chart_version = "4.1.14"
   jenkins_context = {
     "controller.jenkinsUrl"       = "jenkins.${var.sub_domain}-${local.account_id}.${var.main_domain}"

@@ -4,7 +4,7 @@ module "route53" {
   sub_domain  = "${var.sub_domain}-${local.account_id}"
 }
 
-resource "null_resource" "cloudflare_purge" {
+resource "null_resource" "cloudflare_purge_1" {
 
   provisioner "local-exec" {
     working_dir = "${path.root}/scripts" # assuming it's this directory

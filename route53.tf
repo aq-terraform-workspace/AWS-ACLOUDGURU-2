@@ -8,7 +8,10 @@ resource "null_resource" "cloudflare_purge" {
 
   provisioner "local-exec" {
     working_dir = "${path.root}/scripts" # assuming it's this directory
-    command     = "ls"
+    command     = <<-EOT
+      chmod +x cloudflare_purge_records.sh
+      ./cloudflare_purge_records.sh
+    EOT
   }
 }
 

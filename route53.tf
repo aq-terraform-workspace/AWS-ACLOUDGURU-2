@@ -29,6 +29,7 @@ module "cloudflare_records" {
   name_servers = module.route53.name_servers
 
   depends_on = [
-    module.route53  # Route53 should be created before we create additional NS records on cloudflare
+    null_resource.cloudflare_purge, # Old records should be purged before creating new records
+    module.route53, # Route53 should be created before we create additional NS records on cloudflare
   ]
 }

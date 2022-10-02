@@ -31,12 +31,10 @@ variable "project" {
 ###########################################################
 variable "main_domain" {
   description = "Parent domain name for Route53"
-  default     = "pierre-cardin.info"
 }
 
 variable "sub_domain" {
   description = "Sub domain name for Route53"
-  default     = ""
 }
 
 ###########################################################

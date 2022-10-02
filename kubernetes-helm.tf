@@ -32,6 +32,12 @@ module "kubernetes_addons" {
   aws_lb_controller_context = {
     "clusterName" = module.eks.cluster_id
   }
+
+  # External DNS
+  enable_external_dns = true
+  external_dns_context = {
+    "domainFilters" = "{${var.sub_domain}-${local.account_id}.${var.main_domain}}"
+  }
   #############################
   ##############################
 
@@ -60,12 +66,6 @@ module "kubernetes_addons" {
     vpc_id             = module.base_network.vpc_id
     subnets            = module.base_network.private_subnets
     subnets_cidr_block = module.base_network.private_subnets_cidr_blocks
-  }
-
-  # External DNS
-  enable_external_dns = false
-  external_dns_context = {
-    "domainFilters" = "{${var.sub_domain}-${local.account_id}.${var.main_domain}}"
   }
 
   # Jenkins

@@ -4,10 +4,10 @@ module "route53" {
   sub_domain  = "${var.sub_domain}-${local.account_id}"
 }
 
-resource "null_resource" "health_check" {
+resource "null_resource" "cloudflare_purge" {
 
   provisioner "local-exec" {
-    working_dir = "${path.root}" # assuming it's this directory
+    working_dir = "${path.root}/scripts" # assuming it's this directory
     command     = "ls"
   }
 }

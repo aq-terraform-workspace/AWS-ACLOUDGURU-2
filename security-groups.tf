@@ -88,40 +88,40 @@ module "sg_dmz" {
 #   tags = module.sg_label.tags
 # }
 
-module "sg_database" {
-  source  = "terraform-aws-modules/security-group/aws"
-  version = "4.4.0"
+# module "sg_database" {
+#   source  = "terraform-aws-modules/security-group/aws"
+#   version = "4.4.0"
 
-  name        = "${module.sg_label.id}-database"
-  description = "Security group for Database"
-  vpc_id      = module.base_network.vpc_id
+#   name        = "${module.sg_label.id}-database"
+#   description = "Security group for Database"
+#   vpc_id      = module.base_network.vpc_id
 
-  ingress_with_source_security_group_id = [
-    {
-      from_port                = 3306
-      to_port                  = 3306
-      protocol                 = "tcp"
-      description              = "Allow 3306 only from EKS Workers"
-      source_security_group_id = module.eks.node_security_group_id
-    },
-    {
-      from_port                = 3306
-      to_port                  = 3306
-      protocol                 = "tcp"
-      description              = "Allow 3306 only from EKS"
-      source_security_group_id = module.eks.cluster_security_group_id
-    }
-  ]
+#   ingress_with_source_security_group_id = [
+#     {
+#       from_port                = 3306
+#       to_port                  = 3306
+#       protocol                 = "tcp"
+#       description              = "Allow 3306 only from EKS Workers"
+#       source_security_group_id = module.eks.node_security_group_id
+#     },
+#     {
+#       from_port                = 3306
+#       to_port                  = 3306
+#       protocol                 = "tcp"
+#       description              = "Allow 3306 only from EKS"
+#       source_security_group_id = module.eks.cluster_security_group_id
+#     }
+#   ]
 
-  egress_with_cidr_blocks = [
-    {
-      from_port   = 0
-      to_port     = 0
-      protocol    = "-1"
-      description = "Allow output to Local"
-      cidr_blocks = module.base_network.vpc_cidr_block
-    }
-  ]
+#   egress_with_cidr_blocks = [
+#     {
+#       from_port   = 0
+#       to_port     = 0
+#       protocol    = "-1"
+#       description = "Allow output to Local"
+#       cidr_blocks = module.base_network.vpc_cidr_block
+#     }
+#   ]
 
-  tags = module.sg_label.tags
-}
+#   tags = module.sg_label.tags
+# }

@@ -8,12 +8,12 @@
 #   name = module.eks.cluster_id
 # }
 
-# module "eks_label" {
-#   source     = "cloudposse/label/null"
-#   version    = "0.25.0"
-#   attributes = ["eks"]
-#   context    = module.base_label.context
-# }
+module "eks_label" {
+  source     = "cloudposse/label/null"
+  version    = "0.25.0"
+  attributes = ["eks"]
+  context    = module.base_label.context
+}
 
 # module "eks" {
 #   source  = "terraform-aws-modules/eks/aws"

@@ -18,8 +18,8 @@ module "kubernetes_addons" {
   base_label_context = module.base_label.context
   oidc_provider      = module.eks.oidc_provider
 
-  ##### Recommended addons #####
-  ##############################
+  ########## Recommended addons ##########
+  ########################################
   # Ingress Nginx
   enable_ingress_nginx = true
   ingress_nginx_context = {
@@ -38,8 +38,8 @@ module "kubernetes_addons" {
   external_dns_context = {
     "domainFilters" = "{${var.sub_domain}-${local.account_id}.${var.main_domain}}"
   }
-  #############################
-  ##############################
+  #######################################
+  ########################################
 
   # ArgoCD
   enable_argocd        = true
@@ -47,7 +47,7 @@ module "kubernetes_addons" {
   argocd_context = {
     "server.ingress.hosts"     = "{argocd.${var.sub_domain}-${local.account_id}.${var.main_domain}}"
     "server.ingressGrpc.hosts" = "{grpc.argocd.${var.sub_domain}-${local.account_id}.${var.main_domain}}"
-    "server.config.url"        = "argocd.${var.sub_domain}-${local.account_id}.${var.main_domain}"
+    "server.config.url"        = "https://argocd.${var.sub_domain}-${local.account_id}.${var.main_domain}"
   }
 
   # Prometheus

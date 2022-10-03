@@ -98,7 +98,6 @@ enable_aws_lb_controller = true
 enable_external_dns      = true
 # Other Addons
 enable_argocd         = true
-enable_cert_manager   = true
 enable_snapscheduler  = false
 enable_efs_csi_driver = false
 enable_prometheus     = false

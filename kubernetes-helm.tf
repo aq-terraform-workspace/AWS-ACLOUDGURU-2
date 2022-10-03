@@ -19,7 +19,6 @@ module "kubernetes_addons" {
   enable_snapscheduler  = var.enable_snapscheduler
   enable_secret_csi     = var.enable_secret_csi
   enable_vault          = var.enable_vault
-  enable_cert_manager   = var.enable_cert_manager
   enable_velero         = var.enable_vault
   enable_keda           = var.enable_keda
   enable_linkerd        = var.enable_linkerd

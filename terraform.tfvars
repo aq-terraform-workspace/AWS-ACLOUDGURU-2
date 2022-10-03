@@ -87,7 +87,7 @@ timeouts_delete      = "60m"
 # ROUTE53 VARIABLES #
 #####################
 main_domain = "anhquach.dev"
-sub_domain  = "demo"
+sub_domain  = "acloudguru"
 
 #####################
 #### EKS ADDONS #####

@@ -38,7 +38,7 @@ module "kubernetes_addons" {
   external_dns_context = {
     "domainFilters" = "{${var.sub_domain}-${local.account_id}.${var.main_domain}}"
   }
-  #######################################
+  ########################################
   ########################################
 
   # ArgoCD

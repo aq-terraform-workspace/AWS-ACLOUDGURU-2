@@ -92,4 +92,19 @@ sub_domain  = "demo"
 #####################
 #### EKS ADDONS #####
 #####################
-enable_cert_manager = true
+# Recommended Addons
+enable_ingress_nginx     = false
+enable_aws_lb_controller = true
+enable_external_dns      = false
+# Other Addons
+enable_cert_manager   = true
+enable_argocd         = true
+enable_snapscheduler  = false
+enable_efs_csi_driver = false
+enable_prometheus     = false
+enable_jenkins        = false
+enable_velero         = false
+enable_keda           = false
+enable_linkerd        = false
+enable_vault          = false
+enable_secret_csi     = false

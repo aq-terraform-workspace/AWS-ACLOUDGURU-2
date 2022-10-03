@@ -12,7 +12,7 @@ resource "kustomization_resource" "ebs_csi" {
 
 
 module "kubernetes_addons" {
-  source = "git::https://github.com/aq-terraform-modules/terraform-aws-kubernetes-addons.git?ref=master"
+  source = "git@github.com:aq-terraform-modules/terraform-aws-kubernetes-addons.git?ref=master"
 
   # Basic variables
   base_label_context = module.base_label.context

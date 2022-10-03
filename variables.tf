@@ -316,20 +316,8 @@ variable "enable_prometheus" {
   default     = false
 }
 
-variable "enable_ingress_nginx" {
-  description = "Enable Ingress Nginx or not"
-  type        = bool
-  default     = false
-}
-
 variable "enable_external_dns" {
   description = "Enable External DNS or not"
-  type        = bool
-  default     = false
-}
-
-variable "enable_jenkins" {
-  description = "Enable Jenkins or not"
   type        = bool
   default     = false
 }

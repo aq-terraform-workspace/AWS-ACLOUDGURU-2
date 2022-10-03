@@ -7,7 +7,6 @@ module "kubernetes_addons" {
 
   ############### Recommended addons ###############
   ##################################################
-  enable_ingress_nginx     = var.enable_ingress_nginx
   enable_aws_lb_controller = var.enable_aws_lb_controller
   enable_external_dns      = var.enable_external_dns
   ##################################################
@@ -16,7 +15,6 @@ module "kubernetes_addons" {
   ##################################################
   enable_argocd         = var.enable_argocd
   enable_efs_csi_driver = var.enable_efs_csi_driver
-  enable_jenkins        = var.enable_jenkins
   enable_prometheus     = var.enable_prometheus
   enable_snapscheduler  = var.enable_snapscheduler
   enable_secret_csi     = var.enable_secret_csi

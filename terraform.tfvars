@@ -93,9 +93,9 @@ sub_domain  = "acloudguru"
 #### EKS ADDONS #####
 #####################
 # Recommended Addons
-enable_ingress_nginx     = false
+enable_ingress_nginx     = true
 enable_aws_lb_controller = true
-enable_external_dns      = false
+enable_external_dns      = true
 # Other Addons
 enable_cert_manager   = true
 enable_argocd         = true

@@ -88,3 +88,8 @@ timeouts_delete      = "60m"
 #####################
 main_domain = "anhquach.dev"
 sub_domain  = "demo"
+
+#####################
+#### EKS ADDONS #####
+#####################
+enable_cert_manager = true

@@ -36,7 +36,7 @@ module "kubernetes_addons" {
   # External DNS
   enable_external_dns = var.enable_external_dns
   external_dns_context = {
-    "domainFilters" = "{${var.sub_domain}-${local.account_id}.${var.main_domain}}"
+    "domainFilters" = "{${var.sub_domain}.${var.main_domain}}"
   }
   ########################################
   ########################################
@@ -45,16 +45,16 @@ module "kubernetes_addons" {
   enable_argocd        = var.enable_argocd
   argocd_chart_version = "5.5.7"
   argocd_context = {
-    "server.ingress.hosts"     = "{argocd.${var.sub_domain}-${local.account_id}.${var.main_domain}}"
-    "server.ingressGrpc.hosts" = "{grpc.argocd.${var.sub_domain}-${local.account_id}.${var.main_domain}}"
-    "server.config.url"        = "https://argocd.${var.sub_domain}-${local.account_id}.${var.main_domain}"
+    "server.ingress.hosts"     = "{argocd.${var.sub_domain}.${var.main_domain}}"
+    "server.ingressGrpc.hosts" = "{grpc.argocd.${var.sub_domain}.${var.main_domain}}"
+    "server.config.url"        = "https://argocd.${var.sub_domain}.${var.main_domain}"
   }
 
   # Prometheus
   enable_prometheus = var.enable_prometheus
   prometheus_context = {
-    "grafana.ingress.hosts"    = "{grafana.${var.sub_domain}-${local.account_id}.${var.main_domain}}"
-    "prometheus.ingress.hosts" = "{prometheus.${var.sub_domain}-${local.account_id}.${var.main_domain}}"
+    "grafana.ingress.hosts"    = "{grafana.${var.sub_domain}.${var.main_domain}}"
+    "prometheus.ingress.hosts" = "{prometheus.${var.sub_domain}.${var.main_domain}}"
   }
 
   # Snapscheduler
@@ -72,8 +72,8 @@ module "kubernetes_addons" {
   enable_jenkins        = var.enable_jenkins
   jenkins_chart_version = "4.1.14"
   jenkins_context = {
-    "controller.jenkinsUrl"       = "jenkins.${var.sub_domain}-${local.account_id}.${var.main_domain}"
-    "controller.ingress.hostName" = "jenkins.${var.sub_domain}-${local.account_id}.${var.main_domain}"
+    "controller.jenkinsUrl"       = "jenkins.${var.sub_domain}.${var.main_domain}"
+    "controller.ingress.hostName" = "jenkins.${var.sub_domain}.${var.main_domain}"
   }
 
   # Secret CSI Driver
@@ -82,7 +82,7 @@ module "kubernetes_addons" {
   # Vault
   enable_vault = var.enable_vault
   vault_context = {
-    "server.ingress.hosts[0].host" = "vault.${var.sub_domain}-${local.account_id}.${var.main_domain}"
+    "server.ingress.hosts[0].host" = "vault.${var.sub_domain}.${var.main_domain}"
   }
 
   # Cert Manager

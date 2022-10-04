@@ -15,12 +15,9 @@ module "kubernetes_addons" {
   ##################################################
   enable_argocd         = var.enable_argocd
   enable_efs_csi_driver = var.enable_efs_csi_driver
-  enable_prometheus     = var.enable_prometheus
   enable_snapscheduler  = var.enable_snapscheduler
-  enable_secret_csi     = var.enable_secret_csi
   enable_vault          = var.enable_vault
   enable_velero         = var.enable_vault
-  enable_keda           = var.enable_keda
   enable_linkerd        = var.enable_linkerd
   ##################################################
 

@@ -36,7 +36,7 @@ enable_monitoring     = false
 #####################
 cluster_version = "1.22"
 node_group_name = "main-group"
-instance_types  = ["t3a.medium", "t3.medium", "t2.medium"]
+instance_types  = ["t3a.large", "t3.large"]
 capacity_type   = "SPOT"
 disk_size       = 50
 min_size        = 1
@@ -93,17 +93,13 @@ sub_domain  = "acloudguru"
 #### EKS ADDONS #####
 #####################
 # Recommended Addons
-enable_ingress_nginx     = true
 enable_aws_lb_controller = true
 enable_external_dns      = true
 # Other Addons
 enable_argocd         = true
 enable_snapscheduler  = false
 enable_efs_csi_driver = false
-enable_prometheus     = false
-enable_jenkins        = false
 enable_velero         = false
-enable_keda           = false
 enable_linkerd        = false
 enable_vault          = false
 enable_secret_csi     = false

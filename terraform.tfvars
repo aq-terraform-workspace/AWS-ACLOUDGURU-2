@@ -36,7 +36,7 @@ enable_monitoring     = false
 #####################
 cluster_version = "1.22"
 node_group_name = "main-group"
-instance_types  = ["t3a.large"]
+instance_types  = ["t3.large"]
 capacity_type   = "SPOT"
 disk_size       = 50
 min_size        = 1

@@ -1,7 +1,7 @@
 # TERRAFORM DEPLOY EKS ON AWS
 ## Prequisites
 ### Required tools
-- aws-cli installed and configure with profile named `demo`
+- aws-cli installed and configure with profile named `demo`.
 
 ### Configure the backend inside `backend.tf`
 
